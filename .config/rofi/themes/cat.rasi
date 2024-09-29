@@ -1,0 +1,106 @@
+* {
+    bg-col:  #282a36e0;
+    bg-col-opaque: #282a36;
+    text-selected: #282a50;
+    selected-col: #1e1e2ee0;
+    fg-col: #faf9f6e0;
+    fg-col-opaque: #faf9f6;
+    error-col: #ffa3d2;
+
+    width: 700;
+    font: "JetBrains Mono 11";
+    background-color: transparent;
+/*    border: 1px; */
+/*    border-color: #ff0000; */
+}
+
+element-text, element-icon , mode-switcher {
+    background-color: inherit;
+    text-color:       inherit;
+}
+
+window {
+    height: 500px;
+    border-color: @fg-col-opaque;
+    background-color: @bg-col;
+    border-radius: 5px;
+    border: 2px;
+}
+
+mainbox {
+}
+
+inputbar {
+    children: [prompt,entry];
+    border-radius: 5px;
+    padding: 2px;
+}
+
+prompt {
+    background-color: @fg-col-opaque;
+    padding: 6px;
+    text-color: @bg-col-opaque;
+    border-radius: 3px;
+    margin: 10px 5px;
+}
+
+textbox-prompt-colon {
+    expand: false;
+    str: ":";
+}
+
+/* Searchbox */
+entry {
+    padding: 6px;
+    margin: 10px 0px;
+    text-color: @fg-col-opaque;
+}
+
+listview {
+    margin: 5px;
+    padding: 6px 0px 0px;
+    columns: 2;
+    lines: 5;
+}
+
+element {
+    padding: 5px;
+    text-color: @fg-col-opaque  ;
+}
+
+element-icon {
+    size: 15px;
+}
+
+element selected {
+    background-color:  @selected-col ;
+    text-color: @fg-col-opaque  ;
+}
+
+mode-switcher {
+    spacing: 0;
+}
+
+button {
+    padding: 10px;
+    text-color: @error-col;
+    background-color: @selected-col;
+    vertical-align: 0.5; 
+    horizontal-align: 0.5;
+}
+
+button selected {
+  text-color: @fg-col-opaque;
+  background-color: transparent;
+}
+
+message {
+    background-color: @error-col;
+    padding: 5px;
+}
+
+textbox {
+    padding: 6px;
+    text-color: @bg-col-opaque;
+    background-color: inherit;
+}

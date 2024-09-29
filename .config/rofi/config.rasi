@@ -1,0 +1,18 @@
+configuration{
+    modi: "run,drun,window";
+    icon-theme: "Oranchelo";
+    font: "JetBrains Mono Regular 13";
+    show-icons: true;
+    terminal: "foot";
+    drun-display-format: "{icon} {name}";
+    location: 0;
+    disable-history: false;
+    hide-scrollbar: true;
+    display-drun: "  Apps ";
+    display-run: "   Run ";
+    display-window: " 󰣆  Window ";
+    sidebar-mode: true;
+    border-radius: 10;
+}
+
+@theme "~/.config/rofi/themes/cat.rasi"
