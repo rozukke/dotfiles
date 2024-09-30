@@ -62,7 +62,7 @@ fi
 
 # Integrations
 eval "$(zoxide init zsh)"
-eval "$(fzf --zsh)"
+# eval "$(fzf --zsh)"
 eval "$(starship init zsh)"
 
 alias cat="bat --paging=never"
