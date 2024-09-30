@@ -1,53 +1,61 @@
-local opt = vim.opt
+local o = vim.o
 local g = vim.g
 
 -------------------------------------- globals -----------------------------------------
 g.toggle_theme_icon = "   "
 
 -------------------------------------- options ------------------------------------------
-opt.laststatus = 3
-opt.showmode = false
+o.laststatus = 3
+o.showmode = false
 
-opt.clipboard = "unnamedplus"
-opt.cursorline = true
-opt.cursorlineopt = "number"
+o.clipboard = "unnamedplus"
+o.cursorline = true
+o.cursorlineopt = "number"
 
 -- Whitespace
-opt.list = true
-opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+o.list = true
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- Indenting
-opt.expandtab = true
-opt.shiftwidth = 2
-opt.smartindent = true
-opt.tabstop = 2
-opt.softtabstop = 2
+o.smartindent = true
+o.expandtab = true
+o.shiftwidth = 4
+o.tabstop = 4
+o.softtabstop = 4
 
-opt.fillchars = { eob = " " }
-opt.ignorecase = true
-opt.smartcase = true
-opt.mouse = "a"
+o.wrap = false
+
+vim.opt.fillchars = { eob = " " }
+o.ignorecase = true
+o.smartcase = true
+o.mouse = "a"
+
+-- Search
+o.incsearch = true
+-- don't highlight results after search
+o.hlsearch = false
 
 -- Numbers
-opt.number = true
-opt.numberwidth = 2
-opt.ruler = false
+o.number = true
+o.numberwidth = 2
+o.ruler = false
+o.relativenumber = true
 
 -- disable nvim intro
-opt.shortmess:append "sI"
+vim.opt.shortmess:append "sI"
 
-opt.signcolumn = "yes"
-opt.splitbelow = true
-opt.splitright = true
-opt.timeoutlen = 400
-opt.undofile = true
+o.signcolumn = "yes"
+o.splitbelow = true
+o.splitright = true
+o.timeoutlen = 400
+o.undofile = true
 
 -- interval for writing swap file to disk, also used by gitsigns
-opt.updatetime = 250
+o.updatetime = 250
 
 -- go to previous/next line with h,l,left arrow and right arrow
 -- when cursor reaches end/beginning of line
-opt.whichwrap:append "<>[]hl"
+vim.opt.whichwrap:append "<>[]hl"
 
 -- disable some default providers
 g.loaded_node_provider = 0

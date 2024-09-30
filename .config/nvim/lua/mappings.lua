@@ -121,3 +121,9 @@ end, { desc = "blankline jump to current context" })
 -- Improved paste
 map('v', 'p', 'P', { desc = "Paste without clipboard update"})
 map('v', 'P', 'p', { desc = "Paste with clipboard update"})
+
+--Improved cursor behaviour
+map('n', '<C-d>', '<C-d>zz', { desc = "Reset cursor when paging down" })
+map('n', '<C-u>', '<C-u>zz', { desc = "Reset cursor when paging up" })
+map('n', 'n', 'nzzzv', { desc = "Reset cursor when going to next search" })
+map('n', 'N', 'Nzzzv', { desc = "Reset cursor going to previous search" })

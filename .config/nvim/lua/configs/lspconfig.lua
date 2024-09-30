@@ -1,10 +1,11 @@
 local M = {}
 local map = vim.keymap.set
+local servers = { rust_analyzer = {} }
 
 -- export on_attach & capabilities
 M.on_attach = function(_, bufnr)
   local function opts(desc)
-    return { buffer = bufnr, desc = "LSP " .. desc }
+    return { buffer = bufnr, desc = "LSP: " .. desc }
   end
 
   map("n", "gD", vim.lsp.buf.declaration, opts "Go to declaration")
@@ -19,13 +20,13 @@ M.on_attach = function(_, bufnr)
   end, opts "List workspace folders")
 
   map("n", "<leader>D", vim.lsp.buf.type_definition, opts "Go to type definition")
-  map('n', '<leader>E', vim.lsp.diagnostic.get_line_diagnostics, opts "Show line diagnostics")
+  map('n', '<leader>e', vim.diagnostic.get, opts "Hover [E]rror")
 
   map("n", "<leader>ra", function()
     require "nvchad.lsp.renamer"()
   end, opts "NvRenamer")
 
-  map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts "Code action")
+  map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts "[C]ode [A]ction")
   map("n", "gr", vim.lsp.buf.references, opts "Show references")
 end
 
@@ -83,6 +84,12 @@ M.defaults = function()
         },
       },
     },
+  }
+
+  require("lspconfig").rust_analyzer.setup {
+    on_attach = M.on_attach,
+    capabilities = M.capabilities,
+    on_init = M.on_init,
   }
 end
 
