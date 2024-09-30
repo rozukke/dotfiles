@@ -1,0 +1,12 @@
+[Unit]
+Description=KMonad keyboard config
+
+[Service]
+Restart=always
+RestartSec=3
+ExecStart=/opt/kmonad /home/rozukke/.config/kmonad/colemak-custom-T480s.kbd
+Nice=20
+
+[Install]
+DefaultInstance=config
+WantedBy=default.target
