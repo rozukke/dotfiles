@@ -65,7 +65,7 @@ eval "$(zoxide init zsh)"
 # eval "$(fzf --zsh)"
 eval "$(starship init zsh)"
 
-alias cat="batcat --paging=never"
+alias cat="bat --paging=never"
 alias cd="z"
 alias cl="clear"
 alias ls="ls --color"

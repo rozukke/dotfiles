@@ -103,6 +103,11 @@ return {
   },
 
   {
+    "tpope/vim-sleuth",
+    lazy = false,
+  },
+
+  {
     "neovim/nvim-lspconfig",
     event = "User FilePost",
     config = function()

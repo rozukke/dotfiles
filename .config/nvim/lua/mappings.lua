@@ -18,12 +18,14 @@ map("n", "<C-s>", "<cmd>w<CR>", { desc = "General Save file" })
 map("n", "<C-c>", "<cmd>%y+<CR>", { desc = "General Copy whole file" })
 
 map("n", "<leader>n", "<cmd>set nu!<CR>", { desc = "Toggle line number" })
-map("n", "<leader>rn", "<cmd>set rnu!<CR>", { desc = "Toggle relative number" })
+map("n", "<leader>ra", "<cmd>set rnu!<CR>", { desc = "Toggle relative number" })
 map("n", "<leader>ch", "<cmd>NvCheatsheet<CR>", { desc = "Toggle nvcheatsheet" })
+
+map("n", "<leader>lw", "<cmd>set wrap!<CR>", {desc = "Toggle line wrapping"})
 
 map("n", "<leader>fm", function()
   require("conform").format { lsp_fallback = true }
-end, { desc = "General Format file" })
+end, { desc = "[F]or[m]at file" })
 
 -- global lsp mappings
 map("n", "<leader>ds", vim.diagnostic.setloclist, { desc = "LSP Diagnostic loclist" })
@@ -49,15 +51,15 @@ map("v", "<leader>/", "gc", { desc = "Toggle comment", remap = true })
 
 -- nvimtree
 map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
-map("n", "<leader>l", "<cmd>NvimTreeFocus<CR>", { desc = "nvimtree focus window" })
+-- map("n", "<leader>l", "<cmd>NvimTreeFocus<CR>", { desc = "nvimtree focus window" })
 
 -- telescope
-map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "telescope live grep" })
+map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "Grep project(telescope)" })
 map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "telescope find buffers" })
 map("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", { desc = "telescope help page" })
 map("n", "<leader>ma", "<cmd>Telescope marks<CR>", { desc = "telescope find marks" })
 map("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>", { desc = "telescope find oldfiles" })
-map("n", "<leader>fz", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "telescope find in current buffer" })
+map("n", "<leader>fz", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "[F]u[z]zy find current buffer (telescope)" })
 map("n", "<leader>cm", "<cmd>Telescope git_commits<CR>", { desc = "telescope git commits" })
 map("n", "<leader>gt", "<cmd>Telescope git_status<CR>", { desc = "telescope git status" })
 map("n", "<leader>pt", "<cmd>Telescope terms<CR>", { desc = "telescope pick hidden term" })
@@ -85,11 +87,11 @@ end, { desc = "terminal new vertical window" })
 -- toggleable
 map({ "n", "t" }, "<A-v>", function()
   require("nvchad.term").toggle { pos = "vsp", id = "vtoggleTerm" }
-end, { desc = "terminal toggleable vertical term" })
+end, { desc = "[V]ertical terminal toggle" })
 
 map({ "n", "t" }, "<A-h>", function()
   require("nvchad.term").toggle { pos = "sp", id = "htoggleTerm" }
-end, { desc = "terminal toggleable horizontal term" })
+end, { desc = "[H]orizontal terminal toggle" })
 
 map({ "n", "t" }, "<A-i>", function()
   require("nvchad.term").toggle { pos = "float", id = "floatTerm" }
@@ -119,11 +121,11 @@ map("n", "<leader>cc", function()
 end, { desc = "blankline jump to current context" })
 
 -- Improved paste
-map('v', 'p', 'P', { desc = "Paste without clipboard update"})
-map('v', 'P', 'p', { desc = "Paste with clipboard update"})
+map("v", "p", "P", { desc = "Paste without clipboard update" })
+map("v", "P", "p", { desc = "Paste with clipboard update" })
 
 --Improved cursor behaviour
-map('n', '<C-d>', '<C-d>zz', { desc = "Reset cursor when paging down" })
-map('n', '<C-u>', '<C-u>zz', { desc = "Reset cursor when paging up" })
-map('n', 'n', 'nzzzv', { desc = "Reset cursor when going to next search" })
-map('n', 'N', 'Nzzzv', { desc = "Reset cursor going to previous search" })
+map("n", "<C-d>", "<C-d>zz", { desc = "Reset cursor when paging down" })
+map("n", "<C-u>", "<C-u>zz", { desc = "Reset cursor when paging up" })
+map("n", "n", "nzzzv", { desc = "Reset cursor when going to next search" })
+map("n", "N", "Nzzzv", { desc = "Reset cursor going to previous search" })
