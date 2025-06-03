@@ -71,3 +71,6 @@ alias cl="clear"
 alias ls="ls --color"
 alias la="ls -la"
 alias edit="nvim"
+alias ssh="kitten ssh"
+
+. "$HOME/.grit/bin/env"
