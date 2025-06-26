@@ -16,6 +16,7 @@ return {
 			vim.keymap.set("n", "<leader>sr", require("fzf-lua").git_files, { desc = "[S]earch [R]oot" })
 			vim.keymap.set("n", "<leader>s.", require("fzf-lua").resume, { desc = "[S]earch resume" })
 			vim.keymap.set("n", "<leader>sa", require("fzf-lua").resume, { desc = "[S]earch [A]gain (recent)" })
+			vim.keymap.set("n", "<leader>q", require("fzf-lua").diagnostics_workspace, { desc = "[Q]uickfix" })
 		end,
 	},
 }
