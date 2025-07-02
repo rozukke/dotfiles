@@ -1,19 +1,7 @@
-local function get_file_stem(filename)
-	return filename:match("(.+)%..+$") or filename
-end
-
-local function dir_file_stems(dir)
-	local stems = {}
-	local uv = vim.loop
-
-	local fd = uv.fs_opendir(dir)
-
-	local files = uv.fs_readdir(fd)
-end
-
 vim.lsp.enable({
 	"clang",
 	"lua_ls",
+	"astro",
 })
 
 vim.diagnostic.config({
@@ -385,3 +373,6 @@ local function lsp_status_short()
 
 	return "󰒋 " .. table.concat(names, ",")
 end
+
+-- Create command
+vim.api.nvim_create_user_command("LspShort", lsp_status_short, { desc = "Show short LSP information" })
