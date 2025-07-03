@@ -2,6 +2,7 @@ vim.lsp.enable({
 	"clang",
 	"lua_ls",
 	"astro",
+	"bash_ls",
 })
 
 vim.diagnostic.config({
@@ -305,6 +306,10 @@ local function lsp_info()
 
 		-- Key capabilities
 		local caps = client.server_capabilities
+		if not caps then
+			goto continue
+		end
+
 		local key_features = {}
 		if caps.completionProvider then
 			table.insert(key_features, "completion")
@@ -327,6 +332,7 @@ local function lsp_info()
 		end
 
 		print("")
+		::continue::
 	end
 
 	-- Diagnostics summary
@@ -352,6 +358,7 @@ local function lsp_info()
 	print("")
 	print("Use :LspLog to view detailed logs")
 	print("Use :LspCapabilities for full capability list")
+	::continue::
 end
 
 -- Create command
