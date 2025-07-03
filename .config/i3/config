@@ -110,7 +110,6 @@ workspace $ws4 output DP-3
 workspace $ws5 output DP-3
 
 assign [class="firefox"] $ws4
-assign [class="kitty"] $ws1
 
 # reload the configuration file
 bindsym $mod+Shift+h reload
