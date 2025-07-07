@@ -16,6 +16,7 @@ return {
 		"compile_commands.json",
 		"compile_flags.txt",
 		".git",
+		".clangd"
 	},
 	init_options = {
 		fallbackFlags = { "-std=c++17" },

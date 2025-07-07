@@ -10,23 +10,12 @@ return {
 			--  - ci'  - [C]hange [I]nside [']quote
 			require("mini.ai").setup({ n_lines = 500 })
 
-			-- Brace pairs
-			require("mini.pairs").setup()
-
 			-- Add/delete/replace surroundings (brackets, quotes, etc.)
 			--
 			-- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
 			-- - sd'   - [S]urround [D]elete [']quotes
 			-- - sr)'  - [S]urround [R]eplace [)] [']
 			require("mini.surround").setup()
-
-			require("mini.animate").setup({
-				scroll = { enable = true },
-				cursor = { enable = false },
-				resize = { enable = false },
-				open = { enable = false },
-				close = { enable = false },
-			})
 
 			-- Simple and easy statusline.
 			--  You could remove this setup call if you don't like it,

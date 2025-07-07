@@ -1,10 +1,3 @@
-vim.lsp.enable({
-	"clang",
-	"lua_ls",
-	"astro",
-	"bash_ls",
-})
-
 vim.diagnostic.config({
 	virtual_text = true,
 	underline = true,
@@ -86,10 +79,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			})
 
 			vim.api.nvim_create_autocmd("LspDetach", {
-				group = vim.api.nvim_create_augroup("kickstart-lsp-detach", { clear = true }),
+				group = vim.api.nvim_create_augroup("lsp-detach", { clear = true }),
 				callback = function(event2)
 					vim.lsp.buf.clear_references()
-					vim.api.nvim_clear_autocmds({ group = "kickstart-lsp-highlight", buffer = event2.buf })
+					vim.api.nvim_clear_autocmds({ group = "lsp-highlight", buffer = event2.buf })
 				end,
 			})
 		end
@@ -107,14 +100,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 local function restart_lsp(bufnr)
 	bufnr = bufnr or vim.api.nvim_get_current_buf()
-	local clients
-	if vim.lsp.get_clients then
-		clients = vim.lsp.get_clients({ bufnr = bufnr })
-	else
-		---@diagnostic disable-next-line: deprecated
-		clients = vim.lsp.get_active_clients({ bufnr = bufnr })
-	end
-
+	local clients = vim.lsp.get_clients({ bufnr = bufnr })
 	for _, client in ipairs(clients) do
 		vim.lsp.stop_client(client.id)
 	end
@@ -130,8 +116,7 @@ end, {})
 
 local function lsp_status()
 	local bufnr = vim.api.nvim_get_current_buf()
-	local clients = vim.lsp.get_clients and vim.lsp.get_clients({ bufnr = bufnr })
-		or vim.lsp.get_active_clients({ bufnr = bufnr })
+	local clients = vim.lsp.get_clients({ bufnr = bufnr })
 
 	if #clients == 0 then
 		print("󰅚 No LSP clients attached")
@@ -180,8 +165,7 @@ vim.api.nvim_create_user_command("LspStatus", lsp_status, { desc = "Show detaile
 
 local function check_lsp_capabilities()
 	local bufnr = vim.api.nvim_get_current_buf()
-	local clients = vim.lsp.get_clients and vim.lsp.get_clients({ bufnr = bufnr })
-		or vim.lsp.get_active_clients({ bufnr = bufnr })
+	local clients = vim.lsp.get_clients({ bufnr = bufnr })
 
 	if #clients == 0 then
 		print("No LSP clients attached")
@@ -193,24 +177,24 @@ local function check_lsp_capabilities()
 		local caps = client.server_capabilities
 
 		local capability_list = {
-			{ "Completion", caps.completionProvider },
-			{ "Hover", caps.hoverProvider },
-			{ "Signature Help", caps.signatureHelpProvider },
-			{ "Go to Definition", caps.definitionProvider },
-			{ "Go to Declaration", caps.declarationProvider },
-			{ "Go to Implementation", caps.implementationProvider },
-			{ "Go to Type Definition", caps.typeDefinitionProvider },
-			{ "Find References", caps.referencesProvider },
-			{ "Document Highlight", caps.documentHighlightProvider },
-			{ "Document Symbol", caps.documentSymbolProvider },
-			{ "Workspace Symbol", caps.workspaceSymbolProvider },
-			{ "Code Action", caps.codeActionProvider },
-			{ "Code Lens", caps.codeLensProvider },
-			{ "Document Formatting", caps.documentFormattingProvider },
+			{ "Completion",                caps.completionProvider },
+			{ "Hover",                     caps.hoverProvider },
+			{ "Signature Help",            caps.signatureHelpProvider },
+			{ "Go to Definition",          caps.definitionProvider },
+			{ "Go to Declaration",         caps.declarationProvider },
+			{ "Go to Implementation",      caps.implementationProvider },
+			{ "Go to Type Definition",     caps.typeDefinitionProvider },
+			{ "Find References",           caps.referencesProvider },
+			{ "Document Highlight",        caps.documentHighlightProvider },
+			{ "Document Symbol",           caps.documentSymbolProvider },
+			{ "Workspace Symbol",          caps.workspaceSymbolProvider },
+			{ "Code Action",               caps.codeActionProvider },
+			{ "Code Lens",                 caps.codeLensProvider },
+			{ "Document Formatting",       caps.documentFormattingProvider },
 			{ "Document Range Formatting", caps.documentRangeFormattingProvider },
-			{ "Rename", caps.renameProvider },
-			{ "Folding Range", caps.foldingRangeProvider },
-			{ "Selection Range", caps.selectionRangeProvider },
+			{ "Rename",                    caps.renameProvider },
+			{ "Folding Range",             caps.foldingRangeProvider },
+			{ "Selection Range",           caps.selectionRangeProvider },
 		}
 
 		for _, cap in ipairs(capability_list) do
@@ -246,8 +230,7 @@ vim.api.nvim_create_user_command("LspDiagnostics", lsp_diagnostics_info, { desc 
 
 local function lsp_info()
 	local bufnr = vim.api.nvim_get_current_buf()
-	local clients = vim.lsp.get_clients and vim.lsp.get_clients({ bufnr = bufnr })
-		or vim.lsp.get_active_clients({ bufnr = bufnr })
+	local clients = vim.lsp.get_clients({ bufnr = bufnr })
 
 	print("═══════════════════════════════════")
 	print("           LSP INFORMATION          ")
@@ -306,9 +289,6 @@ local function lsp_info()
 
 		-- Key capabilities
 		local caps = client.server_capabilities
-		if not caps then
-			goto continue
-		end
 
 		local key_features = {}
 		if caps.completionProvider then
@@ -332,7 +312,6 @@ local function lsp_info()
 		end
 
 		print("")
-		::continue::
 	end
 
 	-- Diagnostics summary
@@ -358,7 +337,6 @@ local function lsp_info()
 	print("")
 	print("Use :LspLog to view detailed logs")
 	print("Use :LspCapabilities for full capability list")
-	::continue::
 end
 
 -- Create command
@@ -366,8 +344,7 @@ vim.api.nvim_create_user_command("LspInfo", lsp_info, { desc = "Show comprehensi
 
 local function lsp_status_short()
 	local bufnr = vim.api.nvim_get_current_buf()
-	local clients = vim.lsp.get_clients and vim.lsp.get_clients({ bufnr = bufnr })
-		or vim.lsp.get_active_clients({ bufnr = bufnr })
+	local clients = vim.lsp.get_clients({ bufnr = bufnr })
 
 	if #clients == 0 then
 		return "" -- Return empty string when no LSP
@@ -383,3 +360,10 @@ end
 
 -- Create command
 vim.api.nvim_create_user_command("LspShort", lsp_status_short, { desc = "Show short LSP information" })
+
+vim.lsp.enable({
+	"clang",
+	"lua_ls",
+	"astro",
+	"bash_ls",
+})
