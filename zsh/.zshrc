@@ -74,5 +74,3 @@ alias edit="nvim"
 alias fd="fdfind"
 alias lg="lazygit"
 alias vim="nvim"
-
-. "$HOME/.grit/bin/env"
