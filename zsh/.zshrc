@@ -1,3 +1,25 @@
+cat << EOF
+           ░░▒▒▒    ▓█████  ▒█▓▒                  
+          ██████       ▒██     ██                 
+   ░▓██     ▒██▒        ▓█▒    ░█                 
+  ░███▒     ░░░            ▒▒                     
+    ██          ███████▓   ▒████▒                 
+    ░           ████████       █▓                 
+      ██████        ▒███       ██                 
+      ░▒▓██▓        ▒███                          
+         ██▒        ░▒▒▓                          
+         ██▒             █████▓                   
+                        ▒█████▓                   
+            ░███████░       ██▒                   
+             ▒▒▓████       ▒██                    
+                ░███                              
+                 ▒▓▓                              
+                    ▒█████▓                       
+                       ░██     
+
+    Welcome to ZSH, $USER.
+EOF
+
 # Set path for zinit and plugin store
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit"
 
@@ -51,14 +73,10 @@ LANG=en_US.UTF-8
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
+path+=("$HOME/.local/bin" "$HOME/.cargo/bin")
 export PATH
 
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='nvim'
-fi
+export EDITOR='nvim'
 
 # Integrations
 eval "$(zoxide init zsh)"
@@ -75,7 +93,6 @@ alias fd="fdfind"
 alias lg="lazygit"
 alias vim="nvim"
 
-. "$HOME/.grit/bin/env"
 # Variables
 export CXX=/usr/bin/clang++
 export LDFLAGS="-fuse-ld=mold"
