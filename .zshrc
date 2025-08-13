@@ -16,6 +16,7 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 
 # Snippets
+zinit snippet OMZL::git.zsh # git functions
 zinit snippet OMZP::git # git aliases
 zinit snippet OMZP::sudo # sudo aliases
 zinit snippet OMZP::command-not-found # sudo aliases
@@ -50,7 +51,6 @@ LANG=en_US.UTF-8
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
-path+=("$HOME/.local/bin" "$HOME/.cargo/bin")
 export PATH
 
 # Preferred editor for local and remote sessions
@@ -76,3 +76,6 @@ alias lg="lazygit"
 alias vim="nvim"
 
 . "$HOME/.grit/bin/env"
+# Variables
+export CXX=/usr/bin/clang++
+export LDFLAGS="-fuse-ld=mold"

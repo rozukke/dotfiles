@@ -103,11 +103,11 @@ bindsym $mod+Shift+c move container to workspace number $ws3
 bindsym $mod+Shift+d move container to workspace number $ws4
 bindsym $mod+Shift+v move container to workspace number $ws5
 
-workspace $ws1 output DP-5
-workspace $ws2 output DP-5
-workspace $ws3 output DP-5
-workspace $ws4 output DP-3
-workspace $ws5 output DP-3
+workspace $ws1 output HDMI-0
+workspace $ws2 output HDMI-0
+workspace $ws3 output HDMI-0
+workspace $ws4 output DP-5
+workspace $ws5 output DP-5
 
 assign [class="firefox"] $ws4
 
