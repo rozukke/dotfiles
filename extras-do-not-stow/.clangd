@@ -1,0 +1,27 @@
+CompileFlags:
+    Add: [-Wall, -Wextra, -Wpedantic, -Wnull-dereference, -Wconversion, -Wunused-private-field, -Wshadow, -Wimplicit-fallthrough]
+
+
+Style:
+    FullyQualifiedNamespaces: [std]
+
+Diagnostics:
+    UnusedIncludes: Strict
+    ClangTidy:
+        Add:
+            - '*'
+        Remove:
+            - modernize-use-trailing-return-type
+            - llvmlibc-restrict-system-libc-headers
+            - llvmlibc-callee-namespace
+            - hicpp-vararg
+            - llvmlibc-implementation-in-namespace
+            - cppcoreguidelines-pro-type-vararg
+            - bugprone-easily-swappable-parameters
+            - fuchsia-default-arguments-calls
+            - altera-unroll-loops
+
+InlayHints:
+    Enabled: Yes
+    ParameterNames: Yes
+    DeducedTypes: Yes
