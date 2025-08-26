@@ -1,6 +1,8 @@
-# Zellij autostart
-alias zellij="zellij --layout compact"
-eval "$(zellij setup --generate-auto-start zsh)"
+if command -v zellij > /dev/null 2>&1; then
+  # Zellij autostart
+  alias zellij="zellij --layout compact"
+  eval "$(zellij setup --generate-auto-start zsh)"
+fi
 
 # Set path for zinit and plugin store
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit"
@@ -68,7 +70,8 @@ eval "$(starship init zsh)"
 alias cat="batcat --paging=never"
 alias cd="z"
 alias cl="clear"
-alias ls="ls --color -lah"
+alias ls="ls --color -a"
+alias la="ls --color -lah"
 alias edit="nvim"
 alias fd="fdfind"
 alias lg="lazygit"
