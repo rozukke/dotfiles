@@ -7,7 +7,15 @@ return {
 			"folke/snacks.nvim",
 		},
 		opts = {
-			callback = require("snacks").notifier.notify,
+			allow_different_key = true,
+			callback = function(msg) require("snacks").notifier.notify(msg) end,
+			restriction_mode = "hint",
+			restricted_keys = {
+				['<Up>'] = { 'n', 'x' },
+				['<Down>'] = { 'n', 'x' },
+				['<Left>'] = { 'n', 'x' },
+				['<Right>'] = { 'n', 'x' },
+			},
 			disabled_keys = {
 				["<Up>"] = false,
 				["<Down>"] = false,

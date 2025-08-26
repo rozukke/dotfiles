@@ -58,6 +58,33 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		--For example, in C this would take you to the header.
 		map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
+		-- https://clangd.llvm.org/extensions.html#switch-between-sourceheader
+		local function switch_source_header()
+			local method_name = 'textDocument/switchSourceHeader'
+			local client = vim.lsp.get_clients({ bufnr = event.buf, name = 'clang' })[1]
+			if not client then
+				return vim.notify(('method %s is not supported by any servers active on the current buffer'):format(
+					event.buf, method_name))
+			end
+			local params = vim.lsp.util.make_text_document_params(event.buf)
+			client:request(method_name, params,
+				function(err, result)
+					if err then
+						error(tostring(err))
+					end
+					if not result then
+						vim.notify('corresponding file cannot be determined')
+						return
+					end
+					vim.cmd.edit(vim.uri_to_fname(result))
+				end,
+				event.buf)
+		end
+
+		vim.keymap.set("n", "gh", function()
+			switch_source_header()
+		end, { desc = "LSP: [G]o to [H]eader" })
+
 		-- The following two autocommands are used to highlight references of the
 		-- word under your cursor when your cursor rests there for a little while.
 		--    See `:help CursorHold` for information about when this is executed
