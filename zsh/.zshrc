@@ -1,24 +1,6 @@
-cat << EOF
-           ░░▒▒▒    ▓█████  ▒█▓▒                  
-          ██████       ▒██     ██                 
-   ░▓██     ▒██▒        ▓█▒    ░█                 
-  ░███▒     ░░░            ▒▒                     
-    ██          ███████▓   ▒████▒                 
-    ░           ████████       █▓                 
-      ██████        ▒███       ██                 
-      ░▒▓██▓        ▒███                          
-         ██▒        ░▒▒▓                          
-         ██▒             █████▓                   
-                        ▒█████▓                   
-            ░███████░       ██▒                   
-             ▒▒▓████       ▒██                    
-                ░███                              
-                 ▒▓▓                              
-                    ▒█████▓                       
-                       ░██     
-
-    Welcome to ZSH, $USER.
-EOF
+# Zellij autostart
+alias zellij="zellij --layout compact"
+eval "$(zellij setup --generate-auto-start zsh)"
 
 # Set path for zinit and plugin store
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit"
@@ -86,8 +68,7 @@ eval "$(starship init zsh)"
 alias cat="batcat --paging=never"
 alias cd="z"
 alias cl="clear"
-alias ls="ls --color"
-alias la="ls -la"
+alias ls="ls --color -lah"
 alias edit="nvim"
 alias fd="fdfind"
 alias lg="lazygit"
