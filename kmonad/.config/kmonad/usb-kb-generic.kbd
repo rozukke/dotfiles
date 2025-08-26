@@ -1,0 +1,80 @@
+#| --------------------------------------------------------------------------
+   Colemak-DH layout for a ThinkPad T480s with custom layers & nav
+
+   This layout is designed to mirror my QMK layout. Features:
+      - Spacebar mod-tap
+      - IJKL navigational cluster
+      - Symbol layer
+      - Minimal movement away from home row
+
+   Template for adding additional layers:
+
+(deflayer name
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _         _
+  _    _    _    _    _    _    _    _    _    _    _              _
+  _    _    _    _              _              _    _    _    _    _    _
+                                                              _    _    _
+)
+
+  -------------------------------------------------------------------------- |#
+
+;; Bind config to USB keyboard
+(defcfg
+  input  (device-file "/dev/input/by-path/pci-0000:00:14.0-usbv2-0:2:1.0-event-kbd")
+  output (uinput-sink "KMonad output")
+  ;; Commands will fall through layers
+  fallthrough true
+)
+
+;; Default layout - function key and control swapped
+(defsrc
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  home end  ins  del
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '         ret
+  lsft z    x    c    v    b    n    m    ,    .    /              rsft
+  lctl wkup lmet lalt           spc            ralt sys  rctl pgdn up   pgup
+                                                              left down rght
+)
+
+(defalias
+  sym (layer-toggle symbol)
+  ;; Mod tap space, symbol layer
+  mts (tap-hold 150 spc @sym)
+  col (layer-switch colemak-dh)
+  qwe (layer-switch qwerty)
+)
+
+(deflayer colemak-dh
+  lalt f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  home end  ins  del
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    lalt
+  tab  q    w    f    p    b    j    l    u    y    ;    [    ]    \
+  bspc a    r    s    t    g    m    n    e    i    o    '         ret
+  lsft x    c    d    v    z    k    h    ,    .    /              rsft
+  lctl wkup lmet @sym           @mts           ralt sys  @qwe pgdn lalt pgup
+                                                              lalt lalt lalt
+ )
+
+(deflayer symbol
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    [    ]    \(   \)   &    @    {    up   }    _    _    _    _
+  _    !    -    +    =    \_   esc  left down rght :    _         _
+  _    `    %    *    |    $    #    \    <    >    _              _
+  _    _    _    _              _              _    _    _    _    _    _
+                                                              _    _    _
+)
+
+(deflayer qwerty
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _         _
+  _    _    _    _    _    _    _    _    _    _    _              _
+  _    _    _    _              _              _    _    @col _    _    _
+                                                              _    _    _
+)
+
