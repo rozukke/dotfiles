@@ -1,5 +1,3 @@
----@diagnostic disable: missing-fields
-
 require("config.opts")
 require("config.keys")
 require("config.autocmds")
