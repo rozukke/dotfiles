@@ -11,7 +11,7 @@ return {
 			require("fzf-lua").setup()
 			vim.keymap.set("n", "<leader>sh", require("fzf-lua").helptags, { desc = "[S]earch [H]elp" })
 			vim.keymap.set("n", "<leader>sf", require("fzf-lua").files, { desc = "[S]earch [F]iles" })
-			vim.keymap.set("n", "<leader>sb", require("fzf-lua").builtin, { desc = "[S]earch [B]uiltins" })
+			vim.keymap.set("n", "<leader>sb", require("fzf-lua").buffers, { desc = "[S]earch [B]uffers" })
 			vim.keymap.set("n", "<leader>sg", require("fzf-lua").live_grep, { desc = "[S]earch [G]rep" })
 			vim.keymap.set("n", "<leader>sr", require("fzf-lua").git_files, { desc = "[S]earch [R]oot" })
 			vim.keymap.set("n", "<leader>s.", require("fzf-lua").resume, { desc = "[S]earch resume" })

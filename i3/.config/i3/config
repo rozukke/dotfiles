@@ -156,5 +156,6 @@ bar {
 # class          border  border  text    border  border
 client.focused   #e26f8f #e26f8f #ffffff #e26f8f #e26f8f
 
-default_border pixel 3
-default_floating_border pixel 3
+default_border pixel 2
+default_floating_border pixel 2
+gaps inner 4

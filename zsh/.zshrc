@@ -67,6 +67,14 @@ eval "$(zoxide init zsh)"
 # eval "$(fzf --zsh)"
 eval "$(starship init zsh)"
 
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
+
 alias cat="batcat --paging=never"
 alias cd="z"
 alias cl="clear"
@@ -74,7 +82,6 @@ alias ls="ls --color -a"
 alias la="ls --color -lah"
 alias edit="nvim"
 alias fd="fdfind"
-alias lg="lazygit"
 alias vim="nvim"
 
 # Variables
