@@ -1,3 +1,4 @@
+-- Lua LSP helper for vim dev
 return {
 	{
 		"folke/lazydev.nvim",

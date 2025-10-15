@@ -14,11 +14,11 @@ vim.keymap.set("n", "<C-e>", "<C-w><C-k>", { desc = "Move focus to the upper win
 vim.keymap.set("n", "<leader>;", "mzA;<Esc>`z", { desc = "Add semicolon to end of line" })
 vim.keymap.set("n", "<leader>,", "mzA,<Esc>`z", { desc = "Add comma to end of line" })
 
-vim.keymap.set("n", "<leader>i", ":Sleuth<CR>", { desc = "[I]ndent" })
+vim.keymap.set("n", "<leader>i", ":Sleuth<CR>mzgg=G`z", { desc = "[I]ndent" })
 
 vim.keymap.set("n", "<PageUp>", "<C-u>", { desc = "Scroll up half page " })
 vim.keymap.set("n", "<PageDown>", "<C-d>", { desc = "Scroll down half page " })
 
 vim.keymap.set("n", "<leader>e", function()
 	return vim.diagnostic.open_float({ scope = "cursor" })
-end)
+end, { desc = "Float error" })
