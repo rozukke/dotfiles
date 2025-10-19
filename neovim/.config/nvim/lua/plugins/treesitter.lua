@@ -23,5 +23,6 @@ return {
 			highlight = { enable = true },
 			indent = { enable = false },
 		},
-	}
+	},
+	"nvim-treesitter/nvim-treesitter-textobjects",
 }

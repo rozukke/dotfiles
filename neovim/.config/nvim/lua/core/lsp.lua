@@ -48,11 +48,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		-- Fuzzy find all the symbols in your current document.
 		--  Symbols are things like variables, functions, types, etc.
-		map("<leader>ds", require("fzf-lua").lsp_document_symbols, "[D]ocument [S]ymbols")
+		map("<leader>sv", require("fzf-lua").lsp_document_symbols, "[D]ocument [S]ymbols")
 
 		-- Fuzzy find all the symbols in your current workspace.
 		--  Similar to document symbols, except searches over your entire project.
-		map("<leader>ws", require("fzf-lua").lsp_live_workspace_symbols, "[W]orkspace [S]ymbols")
+		map("<leader>sw", require("fzf-lua").lsp_live_workspace_symbols, "[W]orkspace [S]ymbols")
 
 		-- This is not Goto Definition, this is Goto Declaration.
 		--For example, in C this would take you to the header.
@@ -60,25 +60,27 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		-- https://clangd.llvm.org/extensions.html#switch-between-sourceheader
 		local function switch_source_header()
-			local method_name = 'textDocument/switchSourceHeader'
-			local client = vim.lsp.get_clients({ bufnr = event.buf, name = 'clang' })[1]
+			local method_name = "textDocument/switchSourceHeader"
+			local client = vim.lsp.get_clients({ bufnr = event.buf, name = "clang" })[1]
 			if not client then
-				return vim.notify(('method %s is not supported by any servers active on the current buffer'):format(
-					event.buf, method_name))
+				return vim.notify(
+					("method %s is not supported by any servers active on the current buffer"):format(
+						event.buf,
+						method_name
+					)
+				)
 			end
 			local params = vim.lsp.util.make_text_document_params(event.buf)
-			client:request(method_name, params,
-				function(err, result)
-					if err then
-						error(tostring(err))
-					end
-					if not result then
-						vim.notify('corresponding file cannot be determined')
-						return
-					end
-					vim.cmd.edit(vim.uri_to_fname(result))
-				end,
-				event.buf)
+			client:request(method_name, params, function(err, result)
+				if err then
+					error(tostring(err))
+				end
+				if not result then
+					vim.notify("corresponding file cannot be determined")
+					return
+				end
+				vim.cmd.edit(vim.uri_to_fname(result))
+			end, event.buf)
 		end
 
 		vim.keymap.set("n", "gh", function()
@@ -116,7 +118,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		-- Inlay hints
 		if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
-			map("<leader>th", function()
+			map("<leader>", function()
 				vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
 			end, "[T]oggle Inlay [H]ints")
 		end
@@ -204,24 +206,24 @@ local function check_lsp_capabilities()
 		local caps = client.server_capabilities
 
 		local capability_list = {
-			{ "Completion",                caps.completionProvider },
-			{ "Hover",                     caps.hoverProvider },
-			{ "Signature Help",            caps.signatureHelpProvider },
-			{ "Go to Definition",          caps.definitionProvider },
-			{ "Go to Declaration",         caps.declarationProvider },
-			{ "Go to Implementation",      caps.implementationProvider },
-			{ "Go to Type Definition",     caps.typeDefinitionProvider },
-			{ "Find References",           caps.referencesProvider },
-			{ "Document Highlight",        caps.documentHighlightProvider },
-			{ "Document Symbol",           caps.documentSymbolProvider },
-			{ "Workspace Symbol",          caps.workspaceSymbolProvider },
-			{ "Code Action",               caps.codeActionProvider },
-			{ "Code Lens",                 caps.codeLensProvider },
-			{ "Document Formatting",       caps.documentFormattingProvider },
+			{ "Completion", caps.completionProvider },
+			{ "Hover", caps.hoverProvider },
+			{ "Signature Help", caps.signatureHelpProvider },
+			{ "Go to Definition", caps.definitionProvider },
+			{ "Go to Declaration", caps.declarationProvider },
+			{ "Go to Implementation", caps.implementationProvider },
+			{ "Go to Type Definition", caps.typeDefinitionProvider },
+			{ "Find References", caps.referencesProvider },
+			{ "Document Highlight", caps.documentHighlightProvider },
+			{ "Document Symbol", caps.documentSymbolProvider },
+			{ "Workspace Symbol", caps.workspaceSymbolProvider },
+			{ "Code Action", caps.codeActionProvider },
+			{ "Code Lens", caps.codeLensProvider },
+			{ "Document Formatting", caps.documentFormattingProvider },
 			{ "Document Range Formatting", caps.documentRangeFormattingProvider },
-			{ "Rename",                    caps.renameProvider },
-			{ "Folding Range",             caps.foldingRangeProvider },
-			{ "Selection Range",           caps.selectionRangeProvider },
+			{ "Rename", caps.renameProvider },
+			{ "Folding Range", caps.foldingRangeProvider },
+			{ "Selection Range", caps.selectionRangeProvider },
 		}
 
 		for _, cap in ipairs(capability_list) do

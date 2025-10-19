@@ -1,14 +1,23 @@
---  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
+-- General =========================================================================================
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- [[ Setting options ]]
--- Enable line and relative line numbers
+vim.opt.mouse = "a"
+vim.o.mousescroll = "ver:25,hor:6"
+vim.o.switchbuf = "usetab"
+vim.o.undofile = true
+
+vim.o.shada = "'100,<50,s10,:1000,/100,@100,h"
+vim.cmd("filetype plugin indent on")
+if vim.fn.exists("syntax_on") ~= 1 then
+	vim.cmd("syntax enable")
+end
+
+-- UI ==============================================================================================
 vim.opt.number = true
 vim.opt.relativenumber = true
-
--- Enable mouse mode
-vim.opt.mouse = "a"
+vim.opt.colorcolumn = "+1"
+vim.opt.cursorline = true
 
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
@@ -20,11 +29,7 @@ vim.schedule(function()
 	vim.opt.clipboard = "unnamedplus"
 end)
 
--- Enable break indent
 vim.opt.breakindent = true
-
--- Save undo history
-vim.opt.undofile = true
 
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.opt.ignorecase = true
@@ -46,18 +51,11 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 -- Sets how neovim will display certain whitespace characters in the editor.
---  See `:help 'list'`
---  and `:help 'listchars'`
 vim.opt.list = true
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = "split"
-
-vim.opt.colorcolumn = "100"
-
--- Show which line your cursor is on
-vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10

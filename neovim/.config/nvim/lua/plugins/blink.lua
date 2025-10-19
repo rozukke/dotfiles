@@ -11,15 +11,15 @@ return {
 					-- Build Step is needed for regex support in snippets.
 					return "make install_jsregexp"
 				end)(),
-				-- dependencies = {
-				-- 	-- `friendly-snippets` contains a variety of premade snippets.
-				-- 	{
-				-- 		"rafamadriz/friendly-snippets",
-				-- 		config = function()
-				-- 			require("luasnip.loaders.from_vscode").lazy_load()
-				-- 		end,
-				-- 	},
-				-- },
+				dependencies = {
+					-- `friendly-snippets` contains a variety of premade snippets.
+					{
+						"rafamadriz/friendly-snippets",
+						config = function()
+							require("luasnip.loaders.from_vscode").lazy_load()
+						end,
+					},
+				},
 			},
 			"folke/lazydev.nvim",
 		},
