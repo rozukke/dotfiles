@@ -22,3 +22,7 @@ vim.keymap.set("n", "<PageDown>", "<C-d>", { desc = "Scroll down half page " })
 vim.keymap.set("n", "<leader>e", function()
 	return vim.diagnostic.open_float({ scope = "cursor" })
 end, { desc = "Float error" })
+
+-- Visual line indent
+vim.keymap.set("v", "<", "<gv", { desc = "Visually indent line" })
+vim.keymap.set("v", ">", ">gv", { desc = "Visually indent line" })

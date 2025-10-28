@@ -29,6 +29,14 @@ return {
 			-- set use_icons to true if you have a Nerd Font
 			statusline.setup({ use_icons = true })
 
+			require("mini.files").setup({
+				mappings = {
+					go_in = "<Right>",
+					go_out = "<Left>",
+				},
+			})
+			vim.keymap.set("n", "<leader>o", MiniFiles.open, { desc = "[O]pen file navigator" })
+
 			-- You can configure sections in the statusline by overriding their
 			-- default behavior. For example, here we set the section for
 			-- cursor location to LINE:COLUMN
@@ -54,30 +62,26 @@ return {
 				},
 			})
 
-			-- Jump to next/previous single character. It implements "smarter `fFtT` keys"
-			-- (see `:h f`) that work across multiple lines, start "jumping mode", and
-			-- highlight all target matches. Example usage:
-			-- - `fxff` - move *f*orward onto next character "x", then next, and next again
-			-- - `dt)` - *d*elete *t*ill next closing parenthesis (`)`)
-			require("mini.jump").setup()
-			-- Jump within visible lines to pre-defined spots via iterative label filtering.
-			-- Spots are computed by a configurable spotter function. Example usage:
-			-- - Lock eyes on desired location to jump
-			-- - `<CR>` - start jumping; this shows character labels over target spots
-			-- - Type character that appears over desired location; number of target spots
-			--   should be reduced
-			-- - Keep typing labels until target spot is unique to perform the jump
-			--
-			-- See also:
-			-- - `:h MiniJump2d.gen_spotter` - list of available spotters
-			require("mini.jump2d").setup()
-
 			-- Session management. A thin wrapper around `:h mksession` that consistently
 			-- manages session files. Example usage:
 			-- - `<Leader>sn` - start new session
 			-- - `<Leader>sr` - read previously started session
 			-- - `<Leader>sd` - delete previously started session
 			require("mini.sessions").setup()
+
+			require("mini.starter").setup({
+				header = [[
+                                          █████      █████
+                                         ▒▒███      ▒▒███
+ ████████   ██████   █████████ █████ ████ ▒███ █████ ▒███ █████  ██████
+▒▒███▒▒███ ███▒▒███ ▒█▒▒▒▒███ ▒▒███ ▒███  ▒███▒▒███  ▒███▒▒███  ███▒▒███
+ ▒███ ▒▒▒ ▒███ ▒███ ▒   ███▒   ▒███ ▒███  ▒██████▒   ▒██████▒  ▒███████
+ ▒███     ▒███ ▒███   ███▒   █ ▒███ ▒███  ▒███▒▒███  ▒███▒▒███ ▒███▒▒▒
+ █████    ▒▒██████   █████████ ▒▒████████ ████ █████ ████ █████▒▒██████
+▒▒▒▒▒      ▒▒▒▒▒▒   ▒▒▒▒▒▒▒▒▒   ▒▒▒▒▒▒▒▒ ▒▒▒▒ ▒▒▒▒▒ ▒▒▒▒ ▒▒▒▒▒  ▒▒▒▒▒▒
+
+						]],
+			})
 
 			local miniclue = require("mini.clue")
 			miniclue.setup({
