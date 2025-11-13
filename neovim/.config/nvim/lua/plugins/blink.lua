@@ -4,24 +4,8 @@ return {
 		event = "VeryLazy",
 		version = "1.*",
 		dependencies = {
-			-- Snippet Engine
-			{
-				"L3MON4D3/LuaSnip",
-				build = (function()
-					-- Build Step is needed for regex support in snippets.
-					return "make install_jsregexp"
-				end)(),
-				dependencies = {
-					-- `friendly-snippets` contains a variety of premade snippets.
-					{
-						"rafamadriz/friendly-snippets",
-						config = function()
-							require("luasnip.loaders.from_vscode").lazy_load()
-						end,
-					},
-				},
-			},
 			"folke/lazydev.nvim",
+			"rafamadriz/friendly-snippets",
 		},
 		--- @module "blink.cmp"
 		--- @type blink.cmp.Config
@@ -41,16 +25,17 @@ return {
 			},
 
 			sources = {
-				default = { "lsp", "path", "snippets", "lazydev" },
+				default = { "lsp", "path", "snippets", "lazydev", "buffer" },
 				providers = {
-					lazydev = { module = "lazydev.integrations.blink", score_offset = 100 },
+					lazydev = {
+						name = "LazyDev",
+						module = "lazydev.integrations.blink",
+						score_offset = 100,
+					},
 				},
 			},
 
-			snippets = { preset = "luasnip" },
-
 			fuzzy = { implementation = "prefer_rust_with_warning" },
-
 			signature = { enabled = true },
 		},
 	},

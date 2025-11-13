@@ -16,8 +16,8 @@ return {
 					dismiss = "<Esc>",
 					next = "<C-c>",
 				},
-				trigger_on_accept = false
+				trigger_on_accept = false,
 			},
 		})
-	end
+	end,
 }

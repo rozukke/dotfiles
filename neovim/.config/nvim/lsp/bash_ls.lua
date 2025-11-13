@@ -1,5 +1,3 @@
-local utils = require("core.utils");
-
 ---@type vim.lsp.Config
 return {
 	cmd = {
@@ -19,10 +17,10 @@ return {
 		},
 	},
 	on_attach = function()
-		if not utils.exe_exists("shellcheck") then
+		if not vim.fn.executable("shellcheck") then
 			vim.notify("`shellcheck` not installed.", "warn")
 		end
-		if not utils.exe_exists("shfmt") then
+		if not vim.fn.executable("shfmt") then
 			vim.notify("`shfmt` not installed.", "warn")
 		end
 	end,

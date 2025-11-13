@@ -2,6 +2,7 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
 	-- Using the rewrite branch which no longer provides `opts` and instead requires a config function
+	-- This also requires tree-sitter CLI version 22+
 	branch = "main",
 	build = ":TSUpdate",
 	lazy = false,
@@ -15,13 +16,14 @@ return {
 		require("nvim-treesitter").setup()
 
 		-- Manual version of "ensure_installed" and "auto_install" for 'main' branch rewrite
-		require('nvim-treesitter').install {
+		require("nvim-treesitter").install({
 			"bash",
 			"python",
 			"cpp",
 			"c",
 			"diff",
 			"html",
+			"css",
 			"lua",
 			"luadoc",
 			"markdown",
@@ -29,7 +31,7 @@ return {
 			"query",
 			"vim",
 			"vimdoc",
-		}
+		})
 
 		-- Manual version of "highlight = {enabled = true}" and "indent = {enabled = true}"
 		vim.api.nvim_create_autocmd("FileType", {
@@ -39,5 +41,5 @@ return {
 				vim.bo.indentexpr = "v:lua require('nvim-treesitter').indentexpr()"
 			end,
 		})
-	end
+	end,
 }
