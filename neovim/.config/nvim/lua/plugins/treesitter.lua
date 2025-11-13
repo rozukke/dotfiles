@@ -1,28 +1,43 @@
+---@type LazyPluginSpec
 return {
-	{ -- Highlight, edit, and navigate code
-		"nvim-treesitter/nvim-treesitter",
-		build = ":TSUpdate",
-		main = "nvim-treesitter.configs", -- Sets main module to use for opts
-		-- [[ Configure Treesitter ]] See `:help nvim-treesitter`
-		opts = {
-			ensure_installed = {
-				"bash",
-				"cpp",
-				"c",
-				"diff",
-				"html",
-				"lua",
-				"luadoc",
-				"markdown",
-				"markdown_inline",
-				"query",
-				"vim",
-				"vimdoc",
-			},
-			auto_install = true,
-			highlight = { enable = true },
-			indent = { enable = false },
-		},
-	},
-	"nvim-treesitter/nvim-treesitter-textobjects",
+	"nvim-treesitter/nvim-treesitter",
+	-- Using the rewrite branch which no longer provides `opts` and instead requires a config function
+	branch = "main",
+	build = ":TSUpdate",
+	lazy = false,
+	config = function()
+		if vim.fn.executable("tree-sitter") == 0 then
+			vim.notify(
+				"Could not find 'tree-sitter' CLI. Please install to get syntax highlighting.",
+				vim.log.levels.WARN
+			)
+		end
+		require("nvim-treesitter").setup()
+
+		-- Manual version of "ensure_installed" and "auto_install" for 'main' branch rewrite
+		require('nvim-treesitter').install {
+			"bash",
+			"python",
+			"cpp",
+			"c",
+			"diff",
+			"html",
+			"lua",
+			"luadoc",
+			"markdown",
+			"markdown_inline",
+			"query",
+			"vim",
+			"vimdoc",
+		}
+
+		-- Manual version of "highlight = {enabled = true}" and "indent = {enabled = true}"
+		vim.api.nvim_create_autocmd("FileType", {
+			desc = "Enable treesitter in supported buffers.",
+			callback = function()
+				pcall(vim.treesitter.start)
+				vim.bo.indentexpr = "v:lua require('nvim-treesitter').indentexpr()"
+			end,
+		})
+	end
 }

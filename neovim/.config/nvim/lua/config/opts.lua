@@ -8,16 +8,16 @@ vim.o.switchbuf = "usetab"
 vim.o.undofile = true
 
 vim.o.shada = "'100,<50,s10,:1000,/100,@100,h"
-vim.cmd("filetype plugin indent on")
-if vim.fn.exists("syntax_on") ~= 1 then
-	vim.cmd("syntax enable")
-end
 
 -- UI ==============================================================================================
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.colorcolumn = "+1"
+vim.opt.colorcolumn = "100"
 vim.opt.cursorline = true
+
+vim.o.shiftwidth = 4
+vim.o.expandtab = true
+vim.o.tabstop = 4
 
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false

@@ -9,7 +9,7 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit"
 
 # Download zinit if not available
 if [ ! -d "$ZINIT_HOME" ]; then
-  mkdir -p "$(dirname $ZINIT_HOME)"
+  mkdir -p "$(dirname "$ZINIT_HOME")"
   git clone --depth=1 https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
@@ -18,7 +18,6 @@ source "${ZINIT_HOME}/zinit.zsh"
 
 # Plugins
 zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 
 # Snippets
@@ -53,37 +52,52 @@ setopt hist_find_no_dups
 BAT_THEME="ansi"
 LANG=en_US.UTF-8
 
-# Completions
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-
 path+=("$HOME/.local/bin" "$HOME/.cargo/bin")
 export PATH
 
 export EDITOR='nvim'
 
 # Integrations
-eval "$(zoxide init zsh)"
-# eval "$(fzf --zsh)"
-eval "$(starship init zsh)"
+#
+if command -v "zoxide" > /dev/null 2>&1; then
+  eval "$(zoxide init zsh)"
+  alias cd="z"
+fi
+if command -v "fzf" > /dev/null 2>&1; then
+  eval "$(fzf --zsh)"
+fi
+if command -v "starship" > /dev/null 2>&1; then
+  eval "$(starship init zsh)"
+fi
+if command -v "batcat" > /dev/null 2>&1; then
+  alias cat="batcat --paging=never"
+fi
+if command -v "nvim" > /dev/null 2>&1; then
+  alias vim="nvim"
+fi
+if command -v "fdfind" > /dev/null 2>&1; then
+  alias fd="fdfind"
+fi
+
 
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
 	yazi "$@" --cwd-file="$tmp"
 	IFS= read -r -d '' cwd < "$tmp"
-	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd" || return
 	rm -f -- "$tmp"
 }
 
-alias cat="batcat --paging=never"
-alias cd="z"
 alias cl="clear"
 alias ls="ls --color -a"
 alias la="ls --color -lah"
-alias edit="nvim"
-alias fd="fdfind"
-alias vim="nvim"
+alias ..="cd .."
+alias ..="cd ../.."
+alias ...="cd ../../.."
+alias b="cd -"
 
 # Variables
 export CXX=/usr/bin/clang++
-export LDFLAGS="-fuse-ld=mold"
+if command -v "mold" > /dev/null 2>&1; then
+  export LDFLAGS="-fuse-ld=mold"
+fi

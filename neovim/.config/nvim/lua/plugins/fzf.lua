@@ -6,7 +6,11 @@ return {
 		keys = {
 			{ "<leader>s" },
 		},
-		opts = {},
+		opts = {
+			files = {
+				fd_opts = [[--color=never --hidder --type f --type l --exclude .git --exclude build ]]
+			}
+		},
 		config = function()
 			require("fzf-lua").setup()
 			vim.keymap.set("n", "<leader>sh", require("fzf-lua").helptags, { desc = "[S]earch [H]elp" })

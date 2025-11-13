@@ -32,23 +32,3 @@ vim.api.nvim_create_autocmd("VimResized", {
 	pattern = "*",
 	command = "tabdo wincmd =",
 })
-
--- Set default indentation settings (gets overwritten by Sleuth)
-vim.api.nvim_create_autocmd({ "BufEnter", "BufNewFile" }, {
-	pattern = "*",
-	callback = function()
-		if vim.bo.buftype ~= "" then
-			return
-		end
-		vim.opt_local.tabstop = 4
-		if vim.fn.line("$") == 1 and vim.fn.getline(1) == "" then
-			vim.opt_local.shiftwidth = 4
-			vim.opt_local.expandtab = true
-		end
-	end,
-})
-
--- Gets overwritten by Sleuth
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
