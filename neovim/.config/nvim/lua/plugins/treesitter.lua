@@ -12,6 +12,7 @@ return {
 				"Could not find 'tree-sitter' CLI. Please install to get syntax highlighting.",
 				vim.log.levels.WARN
 			)
+			return
 		end
 		require("nvim-treesitter").setup()
 
