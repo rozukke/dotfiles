@@ -29,6 +29,8 @@ zinit snippet OMZP::command-not-found # sudo aliases
 # Load completions
 autoload -U compinit && compinit
 
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+
 zinit cdreplay -q
 
 # Bindings
@@ -99,5 +101,5 @@ alias b="cd -"
 # Variables
 export CXX=/usr/bin/clang++
 if command -v "mold" > /dev/null 2>&1; then
-  export LDFLAGS="-fuse-ld=mold"
+    export LDFLAGS="-fuse-ld=mold"
 fi

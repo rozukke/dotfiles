@@ -13,7 +13,7 @@ exec --no-startup-id dex --autostart --environment i3
 
 # Transparency and wallpaper
 exec_always --no-startup-id picom
-exec_always --no-startup-id feh --bg-scale ~/pictures/flying_wall.png
+exec_always --no-startup-id feh --bg-fill ~/pictures/flying_wall.png
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -81,8 +81,6 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
-# Define names for default workspaces for which we configure key bindings later on.
-# We use variables to avoid repeating the names in multiple places.
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
@@ -108,8 +106,6 @@ workspace $ws2 output HDMI-0
 workspace $ws3 output HDMI-0
 workspace $ws4 output DP-5
 workspace $ws5 output DP-5
-
-assign [class="firefox"] $ws4
 
 # reload the configuration file
 bindsym $mod+Shift+h reload
@@ -140,6 +136,14 @@ mode "resize" {
 }
 
 bindsym $mod+Shift+r mode "resize"
+
+# VNC and similar apps
+mode "passthrough" {
+        bindsym $mod+Escape mode "default"
+}
+
+bindsym $mod+Shift+p mode "passthrough"
+
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
