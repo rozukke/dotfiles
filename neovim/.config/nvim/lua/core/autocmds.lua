@@ -39,6 +39,9 @@ local function detect_buf_expandtab()
 
     local indented_lines = 0
     local tab_count = 0
+    local spc_2 = 0
+    local spc_3 = 0
+    local spc_4 = 0
 
     for _, line in ipairs(vim.api.nvim_buf_get_lines(0, 0, last_line, false)) do
         local leading = line:match('^(%s+)')
@@ -46,17 +49,39 @@ local function detect_buf_expandtab()
             indented_lines = indented_lines + 1
             if leading:find('\t') then
                 tab_count = tab_count + 1
+            else
+                -- Likely number of indent spaces
+                if #leading == 4 then
+                    spc_4 = spc_4 + 1
+                elseif #leading == 3 then
+                    spc_3 = spc_3 + 1
+                elseif #leading == 2 then
+                    spc_2 = spc_2 + 1
+                end
             end
         end
     end
 
-    return indented_lines == 0 or tab_count <= (indented_lines / 2)
+    if indented_lines == 0 or tab_count <= (indented_lines / 2) then
+        local shiftwidth = 4
+        if spc_3 > spc_4 and spc_3 > spc_2 then
+            shiftwidth = 3
+        elseif spc_2 > spc_4 and spc_2 > spc_3 then
+            shiftwidth = 2
+        end
+
+        -- no expandtab, shiftwidth 4
+        return true, shiftwidth
+    else
+        -- no expandtab with shiftwidth 4 by default
+        return false, 4
+    end
 end
 
 -- Simple tabs/spaces detection
 vim.api.nvim_create_autocmd('BufReadPost', {
     group = vim.api.nvim_create_augroup('AutoIndentDetect', { clear = true }),
     callback = function()
-        vim.bo.expandtab = detect_buf_expandtab()
+        vim.bo.expandtab, vim.bo.shiftwidth = detect_buf_expandtab()
     end,
 })

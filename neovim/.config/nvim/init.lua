@@ -2,12 +2,10 @@ if vim.loader then
     vim.loader.enable()
 end
 
-require('config.opts')
-require('config.keys')
-require('config.autocmds')
+require('core.opts')
+require('core.keys')
+require('core.autocmds')
 
--- [[ Install `lazy.nvim` plugin manager ]]
---    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
     local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
@@ -19,9 +17,7 @@ end
 ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup({
-    { import = 'plugins' },
-}, {
+require('lazy').setup({ { import = 'plugins' } }, {
     ui = { border = 'rounded' },
     change_detection = { notify = false },
     rocks = {
@@ -32,6 +28,8 @@ require('lazy').setup({
             disabled_plugins = {
                 'gzip',
                 'netrwPlugin',
+                'rplugin',
+                'tarPlugin',
                 'tutor',
                 'zipPlugin',
                 'tohtml',
