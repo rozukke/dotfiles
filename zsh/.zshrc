@@ -1,9 +1,3 @@
-if command -v zellij > /dev/null 2>&1; then
-  # Zellij autostart
-  alias zellij="zellij --layout compact"
-  eval "$(zellij setup --generate-auto-start zsh)"
-fi
-
 # Set path for zinit and plugin store
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit"
 
@@ -51,7 +45,6 @@ setopt hist_ignore_dups
 setopt hist_find_no_dups
 
 # Variables
-BAT_THEME="ansi"
 LANG=en_US.UTF-8
 
 path+=("$HOME/.local/bin" "$HOME/.cargo/bin")
@@ -60,7 +53,6 @@ export PATH
 export EDITOR='nvim'
 
 # Integrations
-#
 if command -v "zoxide" > /dev/null 2>&1; then
   eval "$(zoxide init zsh)"
   alias cd="z"
@@ -72,6 +64,7 @@ if command -v "starship" > /dev/null 2>&1; then
   eval "$(starship init zsh)"
 fi
 if command -v "batcat" > /dev/null 2>&1; then
+  BAT_THEME="ansi"
   alias cat="batcat --paging=never"
 fi
 if command -v "nvim" > /dev/null 2>&1; then
@@ -99,7 +92,17 @@ alias ...="cd ../../.."
 alias b="cd -"
 
 # Variables
-export CXX=/usr/bin/clang++
+#
+if command -v "clang++" > /dev/null 2>&1; then
+    export CXX=/usr/bin/clang++
+fi
 if command -v "mold" > /dev/null 2>&1; then
     export LDFLAGS="-fuse-ld=mold"
 fi
+
+# Zellij autostart
+if command -v "zellij" > /dev/null 2>&1; then
+    ZELLIJ_AUTO_ATTACH="true"
+    eval "$(zellij setup --generate-auto-start zsh)"
+fi
+
