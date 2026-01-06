@@ -50,6 +50,23 @@ return {
                     },
                 })
             end, { desc = 'Open project session' })
+            vim.api.nvim_create_autocmd('LspAttach', {
+                group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
+                callback = function(event)
+                    -- Utility function to easily define mappings specific to LSP related items.
+                    -- It sets the mode, buffer and description for us each time.
+                    local map = function(keys, func, desc, mode)
+                        mode = mode or 'n'
+                        vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+                    end
+
+                    map('gd', require('fzf-lua').lsp_definitions, '[G]oto [D]efinition')
+                    map('grt', require('fzf-lua').lsp_typedefs, '[G]oto [T]ype')
+                    map('grr', require('fzf-lua').lsp_references, '[G]oto [R]eferences')
+                    map('gri', require('fzf-lua').lsp_implementations, '[G]oto [I]mplementation')
+                    map('gO', require('fzf-lua').lsp_document_symbols, '[D]ocument [S]ymbols')
+                end,
+            })
         end,
     },
 }
