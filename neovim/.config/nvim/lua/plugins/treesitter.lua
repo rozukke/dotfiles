@@ -36,10 +36,10 @@ return {
 
         -- Manual version of "highlight = {enabled = true}" and "indent = {enabled = true}"
         vim.api.nvim_create_autocmd('FileType', {
-            desc = 'Enable treesitter in supported buffers.',
+            desc = 'Enable treesitter in supported buffers',
             callback = function()
                 pcall(vim.treesitter.start)
-                vim.bo.indentexpr = "v:lua require('nvim-treesitter').indentexpr()"
+                -- vim.bo.indentexpr = "v:lua require('nvim-treesitter').indentexpr()"
             end,
         })
     end,

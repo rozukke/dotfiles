@@ -3,10 +3,10 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 vim.opt.mouse = 'a'
-vim.o.mousescroll = 'ver:25,hor:6'
 vim.o.switchbuf = 'usetab'
 
 vim.o.undofile = true
+
 -- Annoying
 vim.o.swapfile = false
 
@@ -38,9 +38,7 @@ vim.opt.breakindent = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
--- Pretty window borders
 vim.o.winborder = 'rounded'
--- Keep signcolumn on by default
 vim.opt.signcolumn = 'yes'
 
 -- Decrease update time
@@ -57,7 +55,7 @@ vim.opt.splitbelow = true
 vim.opt.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
--- Preview substitutions live, as you type!
+-- Preview substitutions live
 vim.opt.inccommand = 'split'
 
 -- Minimal number of screen lines to keep above and below the cursor.

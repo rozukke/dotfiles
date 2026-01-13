@@ -45,8 +45,12 @@ return { -- Collection of various small independent plugins/modules
             pattern = 'MiniFilesBufferCreate',
             callback = function(args)
                 vim.keymap.set('n', '<CR>', function()
+                    local e = MiniFiles.get_fs_entry()
+                    local is_dir = e ~= nil and e.fs_type == 'directory'
                     MiniFiles.go_in()
-                    MiniFiles.close()
+                    if not is_dir then
+                        MiniFiles.close()
+                    end
                 end, { buffer = args.data.buf_id })
             end,
         })

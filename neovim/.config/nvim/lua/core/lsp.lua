@@ -1,7 +1,7 @@
 vim.diagnostic.config({
-    virtual_text = true,
+    virtual_text = false,
     underline = true,
-    update_in_insert = false,
+    update_in_insert = true,
     severity_sort = true,
     float = {
         border = 'rounded',
@@ -24,15 +24,11 @@ vim.diagnostic.config({
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
     callback = function(event)
-        -- Utility function to easily define mappings specific to LSP related items.
-        -- It sets the mode, buffer and description for us each time.
         local map = function(keys, func, desc, mode)
             mode = mode or 'n'
             vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
         end
 
-        -- This is not Goto Definition, this is Goto Declaration.
-        --For example, in C this would take you to the header.
         map('grd', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
         -- Highlight word under cursor
