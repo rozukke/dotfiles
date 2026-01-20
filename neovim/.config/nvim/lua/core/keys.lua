@@ -1,10 +1,13 @@
 -- Remove highlight from search
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
-vim.keymap.set('n', '<C-m>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-i>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-n>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-e>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+-- Only want this when navigation via zellij not available
+if not vim.fn.executable('zellij') then
+    vim.keymap.set('n', '<A-m>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+    vim.keymap.set('n', '<A-i>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+    vim.keymap.set('n', '<A-n>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+    vim.keymap.set('n', '<A-e>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+end
 
 -- Easier scrolling for my keyboard layout
 vim.keymap.set('n', '<PageUp>', '<C-u>', { desc = 'Scroll up half page ' })

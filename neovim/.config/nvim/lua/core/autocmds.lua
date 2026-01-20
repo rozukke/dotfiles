@@ -14,14 +14,17 @@ vim.api.nvim_create_autocmd('BufWinEnter', {
     command = [[ if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif ]],
 })
 
--- Remove extraneous whitespace on save (exclude markdown, which has significant end-line whitespace)
+-- Remove extraneous whitespace on save
 vim.api.nvim_create_autocmd('BufWritePre', {
     desc = 'Remove extraneous whitespace on save',
     pattern = '*',
     callback = function()
         local filename = vim.fn.expand('%:t')
+        -- Exclude markdown, which has significant end-line whitespace
         if not filename:match('%.md$') then
+            local view = vim.fn.winsaveview()
             vim.cmd('%s/\\s\\+$//e')
+            vim.fn.winrestview(view)
         end
     end,
 })
