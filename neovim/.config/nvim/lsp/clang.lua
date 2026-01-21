@@ -44,8 +44,17 @@ return {
         fallbackFlags = { '-std=c++17' },
     },
     on_attach = function(client, _)
+        -- Toggle header/impl
         vim.keymap.set('n', 'gh', function()
             switch_source_header(vim.api.nvim_get_current_buf(), client)
         end, { desc = '[G]o to [H]eader file' })
+        -- Open header/impl in split
+        vim.keymap.set('n', '<leader>wh', function()
+            local win = vim.api.nvim_get_current_win()
+            vim.cmd('vsplit')
+            local buf_new = vim.api.nvim_get_current_buf()
+            switch_source_header(buf_new, client)
+            vim.api.nvim_set_current_win(win)
+        end, { desc = 'Open [W]indow for [H]eader' })
     end,
 }
