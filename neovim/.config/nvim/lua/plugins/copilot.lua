@@ -2,7 +2,7 @@
 return {
     -- NOTE: requires node v22, and NOT newer or older.
     'zbirenbaum/copilot.lua',
-    enabled = true,
+    enabled = false,
     cmd = 'Copilot',
     event = 'InsertEnter',
     config = function()

@@ -8,12 +8,11 @@
     // Choose the order of the modules
     "modules-left": [
         "battery",
-        "sway/workspaces",
-        "sway/mode",
-        "sway/scratchpad"
+        "hyprland/workspaces",
+        "hyprland/submap"
     ],
     "modules-center": [
-        "sway/window"
+        "hyprland/window"
     ],
     "modules-right": [
         "idle_inhibitor",
@@ -24,9 +23,11 @@
         "memory",
         "temperature",
         "backlight",
-        "sway/language",
+        // "sway/language",
         "tray",
-        "clock"
+        "clock",
+        "custom/power",
+        "custom/lock"
     ],
     // Modules configuration
     // "sway/workspaces": {
@@ -67,6 +68,11 @@
         "format-icons": ["", ""],
         "tooltip": true,
         "tooltip-format": "{app}: {title}"
+    },
+    "custom/lock": {
+        "format": "",
+        "tooltip": "Lock",
+        "on-click": "hyprlock"
     },
     "mpd": {
         "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
@@ -196,7 +202,7 @@
         // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
     },
     "custom/power": {
-        "format" : "⏻ ",
+        "format" : "󰤁",
         "tooltip": false,
         "menu": "on-click",
         "menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder

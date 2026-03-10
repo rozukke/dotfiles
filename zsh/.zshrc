@@ -60,9 +60,6 @@ fi
 if command -v "fzf" > /dev/null 2>&1; then
   eval "$(fzf --zsh)"
 fi
-if command -v "starship" > /dev/null 2>&1; then
-  eval "$(starship init zsh)"
-fi
 if command -v "batcat" > /dev/null 2>&1; then
   BAT_THEME="ansi"
   alias cat="batcat --paging=never"
@@ -74,15 +71,6 @@ if command -v "fdfind" > /dev/null 2>&1; then
   alias fd="fdfind"
 fi
 
-
-function y() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-	yazi "$@" --cwd-file="$tmp"
-	IFS= read -r -d '' cwd < "$tmp"
-	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd" || return
-	rm -f -- "$tmp"
-}
-
 alias cl="clear"
 alias ls="ls --color -a"
 alias la="ls --color -lah"
@@ -90,9 +78,9 @@ alias ..="cd .."
 alias ..="cd ../.."
 alias ...="cd ../../.."
 alias b="cd -"
+alias rebuild="sudo nixos-rebuild switch --flake /etc/nixos#artemis-nixos-laptop"
 
 # Variables
-#
 if command -v "clang++" > /dev/null 2>&1; then
     export CXX=/usr/bin/clang++
 fi
@@ -100,8 +88,14 @@ if command -v "mold" > /dev/null 2>&1; then
     export LDFLAGS="-fuse-ld=mold"
 fi
 
+# Interactive non-login shells only
+[[ -o login ]] && return
+
+if command -v "starship" > /dev/null 2>&1; then
+  eval "$(starship init zsh)"
+fi
+
 # Zellij autostart
 if command -v "zellij" > /dev/null 2>&1; then
     eval "$(zellij setup --generate-auto-start zsh)"
 fi
-

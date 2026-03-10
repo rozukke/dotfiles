@@ -4,7 +4,8 @@
 
 keybinds clear-defaults=true {
     locked {
-        bind "Alt u" { SwitchToMode "normal"; }
+        bind "Alt p" { SwitchToMode "pane"; }
+        bind "Alt t" { SwitchToMode "tab"; }
     }
     pane {
         bind "c" { SwitchToMode "renamepane"; PaneNameInput 0; }
