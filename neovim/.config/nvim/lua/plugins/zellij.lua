@@ -1,14 +1,19 @@
 ---@type LazyPluginSpec
-return {
+return { -- Shared navigation between Zellij panels and neovim windows
     'swaits/zellij-nav.nvim',
     event = 'VeryLazy',
     keys = {
-        { '<A-m>', '<cmd>ZellijNavigateLeftTab<cr>', { silent = true, desc = 'navigate left or tab' } },
-        { '<A-n>', '<cmd>ZellijNavigateDown<cr>', { silent = true, desc = 'navigate down' } },
-        { '<A-e>', '<cmd>ZellijNavigateUp<cr>', { silent = true, desc = 'navigate up' } },
+        { '<A-m>', '<cmd>ZellijNavigateLeftTab<cr>',  { silent = true, desc = 'navigate left or tab' } },
+        { '<A-n>', '<cmd>ZellijNavigateDown<cr>',     { silent = true, desc = 'navigate down' } },
+        { '<A-e>', '<cmd>ZellijNavigateUp<cr>',       { silent = true, desc = 'navigate up' } },
         { '<A-i>', '<cmd>ZellijNavigateRightTab<cr>', { silent = true, desc = 'navigate right or tab' } },
     },
     config = function()
+        if not vim.fn.executable('zellij') then
+            vim.notify('`zellij` not installed. Consider disabling the `zellij-nav` plugin.', 'warn')
+            return
+        end
+
         require('zellij-nav').setup()
         -- Unlock zellij when window unfocused
         vim.api.nvim_create_autocmd('VimLeave', {

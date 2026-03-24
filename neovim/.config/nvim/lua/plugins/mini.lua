@@ -83,13 +83,6 @@ return { -- Collection of various small independent plugins/modules
             },
         })
 
-        -- Session management
-        require('mini.sessions').setup()
-        vim.keymap.set('n', '<leader>ww', function()
-            -- Basename of working dir
-            MiniSessions.write(vim.fn.getcwd():match('[^/]+$') .. '.vim')
-        end, { desc = '[W]rite session' })
-
         require('mini.starter').setup({
             header = [[
                                           █████      █████
@@ -128,15 +121,15 @@ return { -- Collection of various small independent plugins/modules
             triggers = {
                 { mode = 'n', keys = '<Leader>' }, -- Leader triggers
                 { mode = 'x', keys = '<Leader>' },
-                { mode = 'n', keys = '\\' }, -- mini.basics
-                { mode = 'n', keys = '[' }, -- mini.bracketed
+                { mode = 'n', keys = '\\' },       -- mini.basics
+                { mode = 'n', keys = '[' },        -- mini.bracketed
                 { mode = 'n', keys = ']' },
                 { mode = 'x', keys = '[' },
                 { mode = 'x', keys = ']' },
                 { mode = 'i', keys = '<C-x>' }, -- Built-in completion
-                { mode = 'n', keys = 'g' }, -- `g` key
+                { mode = 'n', keys = 'g' },     -- `g` key
                 { mode = 'x', keys = 'g' },
-                { mode = 'n', keys = "'" }, -- Marks
+                { mode = 'n', keys = "'" },     -- Marks
                 { mode = 'n', keys = '`' },
                 { mode = 'x', keys = "'" },
                 { mode = 'x', keys = '`' },
@@ -145,7 +138,7 @@ return { -- Collection of various small independent plugins/modules
                 { mode = 'i', keys = '<C-r>' },
                 { mode = 'c', keys = '<C-r>' },
                 { mode = 'n', keys = '<C-w>' }, -- Window commands
-                { mode = 'n', keys = 'z' }, -- `z` key
+                { mode = 'n', keys = 'z' },     -- `z` key
                 { mode = 'x', keys = 'z' },
             },
         })

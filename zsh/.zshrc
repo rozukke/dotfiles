@@ -79,11 +79,9 @@ alias ..="cd ../.."
 alias ...="cd ../../.."
 alias b="cd -"
 alias rebuild="sudo nixos-rebuild switch --flake /etc/nixos#artemis-nixos-laptop"
+alias nixed="sudoedit /etc/nixos/configuration.nix"
 
 # Variables
-if command -v "clang++" > /dev/null 2>&1; then
-    export CXX=/usr/bin/clang++
-fi
 if command -v "mold" > /dev/null 2>&1; then
     export LDFLAGS="-fuse-ld=mold"
 fi
