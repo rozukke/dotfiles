@@ -24,6 +24,7 @@ return { -- Autoformat
             lua = { 'stylua' },
             html = { 'prettierd' },
             python = { 'ruff_format' },
+            nix = { 'nixfmt' },
         },
     },
 }
