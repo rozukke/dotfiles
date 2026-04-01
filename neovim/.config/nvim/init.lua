@@ -3,12 +3,12 @@ if vim.loader then
     vim.loader.enable()
 end
 
-require('core.opts')
-require('core.keys')
-require('core.autocmds')
-require('core.lsp')
+require('opts')
+require('keys')
+require('autocmds')
+require('lsp')
 
--- -- Is this something I need to bother disabling?
+-- -- TODO Is this something I need to bother disabling?
 -- disabled_plugins = {
 --     'gzip',
 --     'netrwPlugin',
