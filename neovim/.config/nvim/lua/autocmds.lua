@@ -89,6 +89,6 @@ vim.api.nvim_create_autocmd('BufReadPost', {
   end,
 })
 
-vim.keymap.set('n', '<leader>e', function()
+vim.keymap.set('n', '<leader>i', function()
   vim.bo.expandtab, vim.bo.shiftwidth = detect_buf_expandtab()
 end)
