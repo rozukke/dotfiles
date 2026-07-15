@@ -46,8 +46,7 @@ setopt hist_find_no_dups
 
 # Variables
 LANG=en_US.UTF-8
-
-path+=("$HOME/.local/bin" "$HOME/.cargo/bin")
+path+=("$HOME/.local/bin" "$HOME/.cargo/bin" "$HOME/.cache/.bun/bin")
 export PATH
 
 export EDITOR='nvim'
@@ -78,8 +77,25 @@ alias ..="cd .."
 alias ..="cd ../.."
 alias ...="cd ../../.."
 alias b="cd -"
-alias rebuild="sudo nixos-rebuild switch --flake /etc/nixos#artemis-nixos-laptop"
+alias rebuild="sudo nixos-rebuild switch --flake /etc/nixos#artemis-nixos-laptop --impure"
 alias nixed="sudoedit /etc/nixos/configuration.nix"
+
+trycd() {
+  dest=$(fd -0 "$1" | head -z -n 1 | tr -d '\0')
+
+  if [ -z "$dest" ]; then
+    echo "not found"
+    return 1
+  fi
+
+  echo "$dest"
+
+  if [ -d "$dest" ]; then
+    cd "$dest"
+  else
+    cd "$(dirname "$dest")"
+  fi
+}
 
 # Variables
 if command -v "mold" > /dev/null 2>&1; then
@@ -97,3 +113,6 @@ fi
 if command -v "zellij" > /dev/null 2>&1; then
     eval "$(zellij setup --generate-auto-start zsh)"
 fi
+
+# opencode
+export PATH=/home/art/.opencode/bin:$PATH

@@ -20,6 +20,13 @@ statusline.section_location = function()
   return '%2l:%-2v'
 end
 
+require('mini.indentscope').setup({
+  delay = 0,
+  draw = {
+    animation = function() return 0 end -- disable animations
+  }
+})
+
 require('mini.files').setup({
   mappings = {
     go_in = '<Right>',
@@ -28,27 +35,42 @@ require('mini.files').setup({
 })
 -- Open in directory of current buffer
 vim.keymap.set('n', '<leader>o', function()
-  -- TODO Fix on new buffer and other edge cases
-  if vim.bo.buftype == '' then
-    MiniFiles.open(vim.api.nvim_buf_get_name(0))
-    MiniFiles.reveal_cwd()
+  local bufname = vim.api.nvim_buf_get_name(0)
+
+  if vim.bo.buftype == '' and bufname ~= '' then
+    MiniFiles.open(bufname)
   else
-    MiniFiles.open()
+    MiniFiles.open(vim.uv.cwd())
   end
+
+  MiniFiles.reveal_cwd()
 end, { desc = '[O]pen file navigator' })
-vim.api.nvim_create_autocmd('User', {
-  pattern = 'MiniFilesBufferCreate',
-  callback = function(args)
-    vim.keymap.set('n', '<CR>', function()
-      local e = MiniFiles.get_fs_entry()
-      local is_dir = e ~= nil and e.fs_type == 'directory'
-      MiniFiles.go_in()
-      if not is_dir then
-        MiniFiles.close()
-      end
-    end, { buffer = args.data.buf_id })
-  end,
-})
+-- Alternate navigation keymap
+vim.keymap.set('n', '<leader>o', function()
+  local bufname = vim.api.nvim_buf_get_name(0)
+
+  -- Check if buffer has a possible location
+  if vim.bo.buftype == '' and bufname ~= '' then
+    local stat = vim.uv.fs_stat(bufname)
+
+    -- File exists
+    if stat then
+      MiniFiles.open(bufname)
+      MiniFiles.reveal_cwd()
+      return
+    end
+
+    -- File is named and is to be saved to directory
+    local parent = vim.fs.dirname(bufname)
+    if parent and vim.uv.fs_stat(parent) then
+      MiniFiles.open(parent)
+      return
+    end
+  end
+
+  -- Fallback
+  MiniFiles.open(vim.uv.cwd())
+end, { desc = '[O]pen file navigator' })
 
 -- Override default notification provider
 require('mini.notify').setup({
@@ -114,24 +136,24 @@ miniclue.setup({
   },
   -- Explicitly opt-in for set of common keys to trigger clue window
   triggers = {
-    { mode = 'n', keys = '<Leader>' },     -- Leader triggers
+    { mode = 'n', keys = '<Leader>' }, -- Leader triggers
     { mode = 'x', keys = '<Leader>' },
-    { mode = 'n', keys = '[' },            -- mini.bracketed
+    { mode = 'n', keys = '[' },        -- mini.bracketed
     { mode = 'n', keys = ']' },
     { mode = 'x', keys = '[' },
     { mode = 'x', keys = ']' },
-    { mode = 'n', keys = 'g' },     -- `g` key
+    { mode = 'n', keys = 'g' }, -- `g` key
     { mode = 'x', keys = 'g' },
-    { mode = 'n', keys = "'" },     -- Marks
+    { mode = 'n', keys = "'" }, -- Marks
     { mode = 'n', keys = '`' },
     { mode = 'x', keys = "'" },
     { mode = 'x', keys = '`' },
-    { mode = 'n', keys = '"' },     -- Registers
+    { mode = 'n', keys = '"' }, -- Registers
     { mode = 'x', keys = '"' },
     { mode = 'i', keys = '<C-r>' },
     { mode = 'c', keys = '<C-r>' },
-    { mode = 'n', keys = '<C-w>' },     -- Window commands
-    { mode = 'n', keys = 'z' },         -- `z` key
+    { mode = 'n', keys = '<C-w>' }, -- Window commands
+    { mode = 'n', keys = 'z' },     -- `z` key
     { mode = 'x', keys = 'z' },
   },
 })

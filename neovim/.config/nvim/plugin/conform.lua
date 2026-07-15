@@ -25,7 +25,14 @@ vim.api.nvim_create_autocmd('BufWritePre', {
         html = { 'prettierd' },
         python = { 'ruff_format' },
         nix = { 'nixfmt' },
+        cpp = { 'clang_format' },
+        c = { 'clang_format' },
       },
+      formatters = {
+        clang_format = {
+          prepend_args = { '--style=file', '--fallback-style=LLVM' }
+        }
+      }
     })
   end
 })

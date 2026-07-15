@@ -71,4 +71,5 @@ vim.lsp.enable({
     'astro',
     'rust',
     'bash_ls',
+    'ocaml'
 })
