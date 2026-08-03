@@ -77,8 +77,6 @@ alias ..="cd .."
 alias ..="cd ../.."
 alias ...="cd ../../.."
 alias b="cd -"
-alias rebuild="sudo nixos-rebuild switch --flake /etc/nixos#artemis-nixos-laptop --impure"
-alias nixed="sudoedit /etc/nixos/configuration.nix"
 
 trycd() {
   dest=$(fd -0 "$1" | head -z -n 1 | tr -d '\0')
@@ -96,6 +94,10 @@ trycd() {
     cd "$(dirname "$dest")"
   fi
 }
+
+
+path=("/home/art/code/nixos/bin" $path)
+export PATH
 
 # Variables
 if command -v "mold" > /dev/null 2>&1; then
