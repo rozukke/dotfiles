@@ -41,9 +41,11 @@ local mainMod = "SUPER"
 
 hl.on("hyprland.start", function()
   hl.exec_cmd("blueman-applet & nm-applet --indicator")
-  hl.exec_cmd("systemctl --user start hyprpolkitagent")
   hl.exec_cmd("mako")
-  hl.exec_cmd("hypridle & hyprpaper")
+  hl.exec_cmd("systemctl --user start hyprpolkitagent")
+  hl.exec_cmd("systemctl --user start hyprsunset")
+  hl.exec_cmd("systemctl --user start hypridle")
+  hl.exec_cmd("systemctl --user start hyprpaper")
 end)
 
 -----------------------------
@@ -101,7 +103,8 @@ hl.config({
   },
   misc = {
     force_default_wallpaper = -1,
-    disable_hyprland_logo = false,
+    disable_hyprland_logo = true,
+    disable_splash_rendering = true,
   },
 })
 
