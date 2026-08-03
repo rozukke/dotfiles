@@ -3,7 +3,7 @@ format = "$username$hostname$all"
 [username]
 show_always = true
 format = "[$user]($style)"
-style_user = "bold green"
+style_user = "bold blue"
 style_root = "bold red"
 
 [hostname]
