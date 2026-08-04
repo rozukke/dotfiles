@@ -71,7 +71,21 @@ vim.keymap.set('n', '<leader>o', function()
   -- Fallback
   MiniFiles.open(vim.uv.cwd())
 end, { desc = '[O]pen file navigator' })
-
+-- Enter to open file
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'MiniFilesBufferCreate',
+  callback = function(args)
+    vim.keymap.set('n', '<CR>', function()
+      for _ = 1, vim.v.count1 do
+        MiniFiles.go_in({ close_on_file = true })
+      end
+    end, {
+      buffer = args.data.buf_id,
+      desc = 'Go in entry',
+      nowait = true,
+    })
+  end,
+})
 -- Override default notification provider
 require('mini.notify').setup({
   lsp_progress = {
