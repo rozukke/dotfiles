@@ -96,7 +96,7 @@ trycd() {
 }
 
 
-path=("/home/art/code/nixos/bin" $path)
+path=("/home/art/nixos/bin" $path)
 export PATH
 
 # Variables
