@@ -4,12 +4,14 @@
 ----------------
 --- MONITORS ---
 ----------------
+---
+local hostname = os.getenv("HOSTNAME") or "artbook"
 
 hl.monitor({
   output = "eDP-1",
   mode = "preferred",
   position = "0x0",
-  scale = 1.25,
+  scale = hostname == "artwork" and 1.25 or 1,
 })
 
 hl.monitor({
