@@ -4,8 +4,13 @@
 ----------------
 --- MONITORS ---
 ----------------
----
-local hostname = os.getenv("HOSTNAME") or "artbook"
+
+local hostname = "artbook"
+local f = io.popen("hostname")
+if f then
+  hostname = f:read("*a"):gsub("%s+", "")
+  f:close()
+end
 
 hl.monitor({
   output = "eDP-1",
@@ -57,6 +62,8 @@ end)
 hl.env("XCURSOR_SIZE", "30")
 hl.env("HYPRCURSOR_SIZE", "30")
 hl.env("HYPRCURSOR_THEME", "rose-pine-hyprcursor")
+hl.env("QT_QPA_PLATFORMTHEME", "kde")
+hl.env("QT_STYLE_OVERRIDE", "BreezeDark")
 
 ---------------------
 --- LOOK AND FEEL ---
@@ -184,7 +191,7 @@ hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))
-hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("hyprshot -m region -o ~/img/hyprshot"))
+hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("hyprshot -m region --freeze -o ~/img/hyprshot"))
 
 hl.bind(mainMod .. " + M", hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. " + I", hl.dsp.focus({ direction = "right" }))
