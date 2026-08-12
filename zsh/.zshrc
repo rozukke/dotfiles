@@ -113,6 +113,7 @@ fi
 
 # Zellij autostart
 if command -v "zellij" > /dev/null 2>&1; then
+    : "${ZELLIJ_AUTO_EXIT:=true}"
     eval "$(zellij setup --generate-auto-start zsh)"
 fi
 
