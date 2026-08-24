@@ -1,0 +1,43 @@
+#!/usr/bin/env sh
+
+for battery in /sys/class/power_supply/BAT*; do
+    [ -r "$battery/capacity" ] || continue
+
+    capacity=$(cat "$battery/capacity") || continue
+    status=Unknown
+    [ -r "$battery/status" ] && status=$(cat "$battery/status")
+
+    case "$status" in
+        Charging)
+            icon="󰂄"
+            color="#00ff99"
+            ;;
+        Full)
+            icon=""
+            color="#33ccff"
+            ;;
+        *)
+            if [ "$capacity" -ge 80 ]; then
+                icon=""
+                color="#ffffff"
+            elif [ "$capacity" -ge 60 ]; then
+                icon=""
+                color="#ffffff"
+            elif [ "$capacity" -ge 40 ]; then
+                icon=""
+                color="#ffffff"
+            elif [ "$capacity" -ge 20 ]; then
+                icon=""
+                color="#ffcc66"
+            else
+                icon=""
+                color="#ff6633"
+            fi
+            ;;
+    esac
+
+    printf '<span foreground="%s">%s%% %s</span>\n' "$color" "$capacity" "$icon"
+    exit 0
+done
+
+exit 0
