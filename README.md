@@ -7,7 +7,7 @@ Safe to say, I have learned a lot from using NixOS.
 ## Features
 - `nvim` configuration based for Neovim 0.11 with no `nvim-lspconfig`, distantly based on `kickstart-nvim`.
 - `.zshrc` with sane defaults.
-- simple `sway`, `kitty`, `waybar`, `i3` (and `i3status`) and `rofi` configuraton with nice colors.
+- simple `sway`, `ghostty`, `waybar`, `i3` (and `i3status`) and `rofi` configuraton with nice colors.
 - `kmonad` remap to colemak-dh and several symbol remaps (space as mod-tap) for a ThinkPad keyboard.
 
 ## Setup
@@ -33,4 +33,4 @@ sudo chattr +i ~/dotfiles
 Some packages that may be required for things to work:
 - `nvim` will require `fzf unzip ripgrep` and probably others
 - `kmonad` with a startup service for the remap(found in extras folder)
-- `kitty` for default terminal
+- `ghostty` for default terminal

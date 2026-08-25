@@ -1,0 +1,39 @@
+# Kanagawa, matching the previous kitty theme.
+foreground = #dcd7ba
+background = #1f1f28
+selection-foreground = #c8c093
+selection-background = #2d4f67
+cursor-color = #c8c093
+
+palette = 0=#16161d
+palette = 1=#c34043
+palette = 2=#76946a
+palette = 3=#c0a36e
+palette = 4=#7e9cd8
+palette = 5=#957fb8
+palette = 6=#6a9589
+palette = 7=#c8c093
+palette = 8=#727169
+palette = 9=#e82424
+palette = 10=#98bb6c
+palette = 11=#e6c384
+palette = 12=#7fb4ca
+palette = 13=#938aa9
+palette = 14=#7aa89f
+palette = 15=#dcd7ba
+palette = 16=#ffa066
+palette = 17=#ff5d62
+
+background-opacity = 0.97
+window-padding-x = 10,0
+
+progress-style = false
+
+bell-features = no-audio
+
+font-family = JetBrains Mono
+font-size = 12
+
+# Keep Ghostty-native TERM. Ghostty handles SSH fallback via shell integration
+# when enabled, while local apps get the terminal's real capabilities.
+term = xterm-ghostty
