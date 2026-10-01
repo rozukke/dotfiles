@@ -1,0 +1,29 @@
+layout {
+    tab name="Run" cwd="/home/art/code/svs" {
+        pane split_direction="vertical" {
+            pane cwd="ViDAR/OnBoardMaritime/CameraNode/build/debug/bin" command="nix" {
+                args "develop" "/home/art/flakes/cn" "-v"
+            }
+
+            pane split_direction="horizontal" {
+                pane cwd="ViDAR/OnBoardMaritime/AggregatorNode/build/debug/bin" command="nix" {
+                    args "develop" "/home/art/flakes/cn" "-v"
+                }
+
+                pane cwd="/home/art/code/klv/"
+            }
+        }
+
+        pane size=1 borderless=true {
+            plugin location="zellij:compact-bar"
+        }
+    }
+
+    tab name="Edit" cwd="/home/art/code/svs" {
+        pane edit="./"
+        pane size=1 borderless=true {
+            plugin location="zellij:compact-bar"
+        }
+    }
+
+}

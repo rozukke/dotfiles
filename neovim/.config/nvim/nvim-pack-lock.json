@@ -50,6 +50,10 @@
       "rev": "d7462543c9e366c0d196c7f67a945eaaf5d99414",
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
     },
+    "projectworks.nvim": {
+      "rev": "55a517b075cb4449bf71973bf4bab262950ea456",
+      "src": "git@gitlab.shield.ai:lachlan.jones/projectworks.nvim.git"
+    },
     "zellij-nav.nvim": {
       "rev": "91cc2a642d8927ebde50ced5bf71ba470a0fc116",
       "src": "https://github.com/swaits/zellij-nav.nvim"

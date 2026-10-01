@@ -127,7 +127,7 @@ button:hover {
 #custom-power,
 #custom-lock,
 #idle_inhibitor,
-#temperature
+#temperature,
 #pulseaudio {
   font-size: 12px;
 }
@@ -180,6 +180,41 @@ tooltip {
 tooltip label {
   color: @fg;
   font-weight: normal;
+}
+
+menu {
+  padding: 4px;
+  background-color: @bg;
+  border: 1.5px solid alpha(@fg, 0.8);
+  border-radius: 3px;
+}
+
+menuitem {
+  min-height: 18px;
+  padding: 3px 10px;
+  background-color: @bg;
+  color: @fg;
+}
+
+menuitem:hover {
+  background-color: #e26f8f;
+  color: @bg;
+}
+
+menuitem label {
+  color: @fg;
+  font-weight: bold;
+}
+
+menuitem:hover > label,
+menuitem:hover > box > label {
+  color: @bg;
+}
+
+menu separator {
+  min-height: 1px;
+  margin: 4px 6px;
+  background-color: alpha(@fg, 0.25);
 }
 
 #custom-windowpill {

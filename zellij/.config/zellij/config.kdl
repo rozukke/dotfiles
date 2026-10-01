@@ -250,6 +250,22 @@ load_plugins {
 //
 theme "kanagawa"
 
+themes {
+    kanagawa {
+        fg "#dcd7ba"
+        bg "#1f1f28"
+        black "#16161d"
+        red "#c34043"
+        green "#e26f8f"
+        yellow "#c0a36e"
+        blue "#7e9cd8"
+        magenta "#957fb8"
+        cyan "#6a9589"
+        white "#dcd7ba"
+        orange "#ffa066"
+    }
+}
+
 // Choose the base input mode of zellij.
 // Default: normal
 //
